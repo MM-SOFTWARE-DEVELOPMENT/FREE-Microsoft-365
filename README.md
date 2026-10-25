@@ -1,61 +1,76 @@
-# FREE-Microsoft-365 - Automated Installation & Activation Utility
+# Office — Deployment & Activation Utility (ODT)
 
 > **Lifetime Activation Note:**  
-> You can use this utility to get Microsoft Office for free forever. If Office or Windows ever becomes deactivated in the future (due to a Windows update or license reset), simply open **`Office.bat`**, select **Activate Office** or **Activate Windows**, and click **RUN SELECTED PROCESS** to instantly reactivate your system.
+> **ODT** allows you to deploy and permanently activate Microsoft Office and Windows. If your system or Office suite ever becomes deactivated in the future (due to a Windows update or license reset), simply open **`Office.bat`**, select **Activate Office** or **Activate Windows**, and click **RUN SELECTED PROCESS** to instantly reactivate your system. This lifetime activation functionality works due to **Massgrave**.
 
----
+## 📢 Acknowledgments & Credits
+
+Special thanks and credit go to the [**Massgrave (MAS / Microsoft Activation Scripts)**](https://massgrave.dev) open-source project. **ODT** relies on their activation framework and tools:
+
+* **OHook Engine:** Permanent Office activation.
+* **HWID Engine:** Permanent Windows Digital License activation bound to your hardware ID.
+* **Edition Managers:** Interactive scripts powered by Massgrave for **Changing/Adding Office Editions** and **Changing Windows Editions**.
 
 ## 1. How to Setup and Run
 
-### Step 1: Download the Script File
-1. Download the **`Office.bat`** file to your computer.
-2. Ensure the file is named **`Office.bat`** before running.
+### Step 1: Download the Script
 
-### Step 2: Run the Utility
-1. Right-click **`Office.bat`** and select **Run as administrator** (or double-click it and accept the UAC prompt).
-2. Choose your desired action from the menu interface:
-   * **Install Office:** Downloads Microsoft 365 Apps for Enterprise (64-bit), configures default file settings, and permanently activates Office.
-   * **Change / Add Office Edition:** Switch Office editions or add secondary components, followed by automatic re-activation.
-   * **Change Windows Edition:** Upgrade or change your Windows SKU (e.g., Home to Pro) with automatic digital license (HWID) activation.
-   * **Activate Office:** Runs a quick, non-destructive activation routine specifically for Microsoft Office using the permanent Ohook method.
-   * **Activate Windows:** Runs a quick digital license (HWID) activation routine specifically for Windows 10/11.
+1. Download or save the script as **`Office.bat`** (or **`Office.cmd`**).
+2. Ensure it retains the `.bat` or `.cmd` extension.
+
+### Step 2: Launch the Interface
+
+1. Right-click **`Office.bat`** and select **Run as administrator** (if launched normally, the utility will automatically prompt for administrator permission).
+2. From the Graphical User Interface (GUI), choose your desired task:
+
+| Task | Description |
+| --- | --- |
+| **Install Office** | Select your Office edition, architecture (64-bit/32-bit), language, update channel, optional product keys, and specific apps. |
+| **Change / Add Office Edition** | Opens Massgrave's menu to change or add extra Office editions without starting from scratch. |
+| **Change Windows Edition** | Opens Massgrave's menu to upgrade your Windows edition (e.g., Home to Pro), activates it, and offers to restart. |
+| **Activate Office** | Runs Massgrave's `/OHook` activation script to activate Office. |
+| **Activate Windows** | Runs Massgrave's `/HWID` script to activate Windows 10/11. |
+| **Check System Activation Status** | Displays your OS version, Windows license state, and Office activation status. |
+
 3. Click **RUN SELECTED PROCESS**.
-4. Monitor progress live in the integrated log panel.
+4. Track progress live via the text box at the bottom of the window.
 
----
+## 2. Key Features
 
-## 2. Overview & Key Features
-
-**Office** is a polyglot PowerShell and Windows Batch hybrid utility designed for automated installation, management, and activation of Microsoft Office and Windows operating systems.
-
-- **Automated Office Installation:** Downloads, extracts, and installs Microsoft 365 Apps directly from Microsoft's Content Delivery Network (CDN).
-- **Permanent Ohook Activation:** Employs the Ohook activation method for lifetime Office activation without altering local binaries.
-- **Windows HWID Activation:** Permanently activates Windows 10/11 using official Microsoft Hardware ID digital licenses.
-- **Interactive WinForms GUI:** Simple, lightweight graphical interface built directly into native Windows components.
-- **Smart Process Polling:** Tracks background Click-to-Run installation processes to ensure activation occurs only after setup completes fully.
-- **Automated Defender Exclusions:** Temporarily excludes the working folder (`C:\ODT`) to prevent security software false positives during installation.
-
----
+* **Dynamic Office Deployment:** Downloads official Office files directly from Microsoft using the official Office Deployment Tool (`setup.exe`).
+* **Wide Product Support:** Supports Microsoft 365, Office 2024 / 2021 Perpetual (LTSC & Retail), Visio, Project, and standalone apps.
+* **App Selection:** Pick only the apps you need (e.g., Word and Excel only, without Teams or OneDrive).
+* **Architecture & Language Options:** Supports 64-bit/32-bit and over 30 languages.
+* **Permanent Activation:** Uses Massgrave's `/OHook` and `/HWID` activation scripts.
+* **Windows & Office Edition Switching:** Easily upgrade Windows or add Office products using Massgrave tools.
+* **Fast Diagnostic Check:** Quickly inspects your system to show if Windows and Office are activated.
+* **Optional Cleanup:** At the end of installation, you can choose to keep the temporary folder (`C:\ODT`) if you want to reinstall later using the exact same configuration, though deleting it is recommended to free up disk space.
 
 ## 3. Technical Specifications
 
-| Feature / Parameter | Specification Details |
-| :--- | :--- |
-| **Tool Name** | Office |
-| **Script Architecture** | Dual-Layer Polyglot (`.bat` Batch Wrapper + Embedded PowerShell 5.1 Host) |
-| **GUI Framework** | `.NET Framework` (`System.Windows.Forms` & `System.Drawing`) |
-| **Execution Directory** | `C:\ODT` (Staging & Installation Folder) |
-| **Target Office Edition** | `O365ProPlusRetail` (Microsoft 365 Apps for Enterprise) |
-| **Architecture** | 64-bit (`OfficeClientEdition="64"`) |
-| **Update Channel** | `Current` Channel |
-| **Office Activation Method** | Permanent Ohook Script Method (`/OHook`) |
-| **Windows Activation Method** | Digital License Hardware ID (`/HWID`) |
-| **Network Protocol** | TLS 1.2 / HTTPS Connection |
+### Architecture & Runtime
 
----
+* **Executable Package:** Polyglot script (`.bat` wrapper encapsulating PowerShell 5.1 host script).
+* **Privilege Elevation:** Auto-elevates via PowerShell `Start-Process -Verb RunAs` if executed without administrator rights.
+* **GUI Engine:** Built natively using `.NET Framework` (`System.Windows.Forms` & `System.Drawing`) without external dependencies.
+* **Networking Protocol:** Enforces TLS 1.2 / HTTPS communication (`[Net.SecurityProtocolType]::Tls12`) for security and CDN updates.
+
+### Staging & File Management
+
+* **Working Staging Folder:** `C:\ODT`
+* **Installer Verification:** Downloads Microsoft's official `setup.exe` (Office Deployment Tool) and verifies its digital signature (`Microsoft Corporation`).
+* **Antivirus Interoperability:** Automatically adds a temporary Defender folder exclusion to `C:\ODT` during execution to prevent deployment blockages.
+* **Folder Cleanup Policy:** User-configurable at completion. You may keep `C:\ODT` to quickly reinstall later with identical configuration XML settings, though deletion is recommended to save storage space.
+
+### Activation & Deployment Core
+
+* **Office Installation Engine:** Dynamic `configuration.xml` generation paired with Microsoft Office Click-to-Run (C2R) CDN setup.
+* **Office Activation Core:** Massgrave permanent Ohook DLL method (`/OHook`).
+* **Windows Activation Core:** Massgrave permanent Digital License / Hardware ID activation (`/HWID`).
+* **Process Tracking Engine:** Real-time polling of `OfficeC2RClient.exe` and `setup.exe` installer processes (up to 60-minute safety threshold).
 
 ## 4. System Requirements
 
-- **Supported Operating Systems:** Windows 10 (64-bit) or Windows 11 (64-bit).
-- **Required Privileges:** Administrator rights (UAC elevation).
-- **Connectivity:** Active internet connection (HTTPS TLS 1.2) to fetch installation files and activation tokens.
+* **Supported Operating Systems:** Windows 10 or Windows 11 (64-bit / 32-bit).
+* **Privileges:** Administrator access (UAC prompt).
+* **Connectivity:** Active internet connection (HTTPS TLS 1.2) for CDN package fetch and license validation.
