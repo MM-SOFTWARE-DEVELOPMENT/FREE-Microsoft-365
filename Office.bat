@@ -121,7 +121,7 @@ $languages = [ordered]@{
 # GUI Window Configuration
 # ------------------------------------------------------------
 $form = New-Object System.Windows.Forms.Form
-$form.Text = "Microsoft Office Deployment & Activation"
+$form.Text = "EzOffice"
 $form.Size = New-Object System.Drawing.Size(560, 830)
 $form.StartPosition = "CenterScreen"
 $form.FormBorderStyle = "FixedDialog"
@@ -129,7 +129,7 @@ $form.MaximizeBox = $false
 
 # Header Title
 $title = New-Object System.Windows.Forms.Label
-$title.Text = "Microsoft Office Setup Assistant"
+$title.Text = "EzOffice Setup Assistant"
 $title.Font = New-Object System.Drawing.Font("Segoe UI", 12, [System.Drawing.FontStyle]::Bold)
 $title.Size = New-Object System.Drawing.Size(520, 25)
 $title.Location = New-Object System.Drawing.Point(15, 10)
