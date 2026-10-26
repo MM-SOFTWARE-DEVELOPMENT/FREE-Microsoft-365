@@ -74,3 +74,4 @@ Special thanks and credit go to the [**Massgrave (MAS / Microsoft Activation Scr
 * **Supported Operating Systems:** Windows 10 or Windows 11 (64-bit / 32-bit).
 * **Privileges:** Administrator access (UAC prompt).
 * **Connectivity:** Active internet connection (HTTPS TLS 1.2) for CDN package fetch and license validation.
+##Built with love ❤️
