@@ -1,4 +1,4 @@
-# EzOffice — Deployment & Activation Utility (ODT)
+### EzOffice — Deployment & Activation Utility (ODT)
 
 > **Lifetime Activation Note:**  
 > **ODT** allows you to deploy and permanently activate Microsoft Office and Windows. If your system or Office suite ever becomes deactivated in the future (due to a Windows update or license reset), simply open **`Office.bat`**, select **Activate Office** or **Activate Windows**, and click **RUN SELECTED PROCESS** to instantly reactivate your system. This lifetime activation functionality works due to **Massgrave**.
@@ -75,4 +75,4 @@ Special thanks and credit go to the [**Massgrave (MAS / Microsoft Activation Scr
 * **Privileges:** Administrator access (UAC prompt).
 * **Connectivity:** Active internet connection (HTTPS TLS 1.2) for CDN package fetch and license validation.
 
-Built with love ❤️
+   # Built with love ❤️
